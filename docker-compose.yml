@@ -1,0 +1,11 @@
+services:
+  levelstart:
+    build: .
+    container_name: levelstart
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    volumes:
+      - "C:/Wallets/Wallet_MIBD_belen_guerrero:/app/wallet:ro"
+    restart: unless-stopped

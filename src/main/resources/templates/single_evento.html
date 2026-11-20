@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{single_evento :: contenido})}">
+
+<body>
+
+    <main th:fragment="contenido" class="w-full pt-16 bg-background min-h-[calc(100vh-16rem)]">
+        <div class="flex flex-col w-full">
+            
+            <!-- Main Showcase Container -->
+            <div class="w-full max-w-[1440px] mx-auto px-margin py-space-xl">
+                <!-- Hero Banner & Event Title Block -->
+                <div
+                    class="relative w-full rounded-2xl overflow-hidden bg-surface-container-lowest border border-outline-variant/40 shadow-lg"
+                >
+                    <!-- Ambient Visual Background with Scrim -->
+                    <div
+                        class="relative h-[380px] lg:h-[460px] w-full bg-cover bg-center"
+                        data-alt="High-tech esports arena in Santiago with massive holographic displays, roaring crowd silhouette, neon cyan and deep violet tournament lighting, vibrant laser shows and cutting edge stage design"
+                        th:style="|background-image: url('/images/evento-hero.jpg');|"
+                    >
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"
+                        ></div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/40 to-transparent"
+                        ></div>
+                        
+                        <!-- Hero Content Overlay -->
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-space-lg lg:p-space-xl flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg"
+                        >
+                            <div class="max-w-3xl space-y-space-xs">
+                                <div
+                                    class="flex items-center gap-space-xs text-secondary-container font-label-md text-label-md uppercase tracking-widest"
+                                >
+                                    <span class="material-symbols-outlined text-[16px]">verified</span>
+                                    <span>Organizado por LevelStart</span>
+                                </div>
+                                <h1
+                                    th:text="${evento.nombre}"
+                                    class="font-headline-lg lg:font-display-hero text-headline-lg lg:text-[42px] lg:leading-[48px] text-white leading-tight drop-shadow-sm"
+                                >
+                                    Nombre
+                                </h1>
+                                <div
+                                    class="flex flex-wrap items-center gap-y-2 gap-x-space-lg pt-space-xs text-slate-200 font-body-md text-body-md"
+                                >
+                                    <div class="flex items-center gap-space-xs text-secondary-container">
+                                        <span class="material-symbols-outlined text-[20px]">event_available</span>
+                                        <span
+                                            class="text-white font-label-md text-label-md"
+                                            th:text="${#temporals.format(evento.fechaEvento, 'dd ''de'' MMMM, yyyy', new java.util.Locale('es', 'ES'))}"
+                                        >
+                                            15 de Mayo, 2025
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-space-xs text-secondary-container">
+                                        <span class="material-symbols-outlined text-[20px]">schedule</span>
+                                        <span
+                                            th:text="${#temporals.format(evento.fechaEvento, 'HH:mm') + ' a ' + #temporals.format(evento.fechaEvento.plusHours(3), 'HH:mm') + ' hrs'}"
+                                            class="text-white font-label-md text-label-md"
+                                        >
+                                            10:00 a 13:00 hrs
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center gap-space-xs text-secondary-container">
+                                        <span class="material-symbols-outlined text-[20px]">pin_drop</span>
+                                        <span 
+                                            th:text="${evento.lugar}"
+                                            class="text-white font-label-md text-label-md"
+                                            >Lugar/span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- Asymmetric 12-Column Content Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl mt-space-xl items-start">
+                    <!-- Primary 8-Column Details Deck -->
+                    <div class="lg:col-span-8 flex flex-col gap-space-xl">
+                        <!-- Section: Descripción & Resumen Rápido -->
+                        <section
+                            class="bg-surface-container-lowest rounded-2xl p-space-xl border border-outline-variant/40 shadow-sm"
+                        >
+                            <div
+                                class="flex items-center gap-space-xs text-primary font-label-md text-label-md uppercase tracking-wider mb-space-sm"
+                            >
+                                <span class="material-symbols-outlined text-[18px]">info</span>
+                                <span>Detalles de la Edición 2025</span>
+                            </div>
+                            <h2 class="font-headline-md text-headline-md text-on-surface mb-space-md">
+                                El mayor despliegue competitivo y cultural gamer
+                            </h2>
+                            <p
+                                th:text="${evento.detalle}"
+                                class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-space-lg"
+                            >
+                                detalles
+                            </p>
+                            <!-- Quick Metrics Bar -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-space-md">
+                                <div
+                                    class="bg-surface-container-low border border-outline-variant/30 p-space-md rounded-xl"
+                                >
+                                    <div class="text-label-sm font-label-sm text-outline uppercase tracking-wider">
+                                        Premio Total
+                                    </div>
+                                    <div class="text-stat-numeric font-stat-numeric text-tertiary-container mt-1">
+                                        $45.000 USD
+                                    </div>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-outline-variant/30 p-space-md rounded-xl"
+                                >
+                                    <div class="text-label-sm font-label-sm text-outline uppercase tracking-wider">
+                                        Equipos Pro
+                                    </div>
+                                    <div class="text-stat-numeric font-stat-numeric text-primary mt-1">
+                                        32 Escuadras
+                                    </div>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-outline-variant/30 p-space-md rounded-xl"
+                                >
+                                    <div class="text-label-sm font-label-sm text-outline uppercase tracking-wider">
+                                        Escenarios LAN
+                                    </div>
+                                    <div class="text-stat-numeric font-stat-numeric text-secondary mt-1">
+                                        4 Arenas 360°
+                                    </div>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-outline-variant/30 p-space-md rounded-xl"
+                                >
+                                    <div class="text-label-sm font-label-sm text-outline uppercase tracking-wider">
+                                        Aforo Máximo
+                                    </div>
+                                    <div class="text-stat-numeric font-stat-numeric text-on-surface mt-1">
+                                        6.500 Fans
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <section
+                            class="bg-surface-container-lowest rounded-2xl p-space-xl border border-outline-variant/40 shadow-sm"
+                        >
+                            <div
+                                class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md"
+                            >
+                                <div>
+                                    <div
+                                        class="flex items-center gap-space-xs text-primary font-label-md text-label-md uppercase tracking-wider mb-space-xs"
+                                    >
+                                        <span class="material-symbols-outlined text-[18px]">reviews</span>
+                                        <span>Feedback y Experiencias Verificadas</span>
+                                    </div>
+                                    <h2 class="font-headline-md text-headline-md text-on-surface">
+                                        Valoraciones y Reseñas de Asistentes
+                                    </h2>
+                                </div>
+                                <span
+                                    class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary-container bg-emerald-100 border border-emerald-200 px-space-md py-1 rounded-full font-semibold self-start sm:self-auto"
+                                >
+                                    <span class="material-symbols-outlined text-[16px]">verified</span>
+                                    98% de asistentes lo recomiendan
+                                </span>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-space-lg">
+                                Opiniones de jugadores y clanes verificados que han asistido a ediciones anteriores
+                                de este torneo.
+                            </p>
+
+
+                            <!-- INICIAR SESIPON COMENTARIOS -->
+                            <div
+                                sec:authorize="!isAuthenticated()"
+                                class="bg-surface-container-low border border-dashed border-outline-variant/60 rounded-xl p-space-lg mb-space-lg shadow-xs relative overflow-hidden"
+                            >
+                                <div class="flex flex-col md:flex-row items-center justify-between gap-space-lg">
+                                    <div class="flex items-start gap-space-md flex-1">
+                                        <div
+                                            class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 border border-primary/20"
+                                        >
+                                            <span class="material-symbols-outlined text-[28px]">lock</span>
+                                        </div>
+                                        <div class="space-y-space-xs">
+                                            <div class="flex items-center gap-space-xs flex-wrap">
+                                                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                                                    Inicia sesión para compartir tu experiencia
+                                                </h3>
+                                                <span
+                                                    class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold flex items-center gap-1"
+                                                >
+                                                    <span class="material-symbols-outlined text-[12px]">verified_user</span>
+                                                    Solo cuentas registradas
+                                                </span>
+                                            </div>
+                                            <p
+                                                class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                                            >
+                                                Solo los asistentes y jugadores autenticados en LevelStart pueden
+                                                calificar arenas, arbitraje y organización para mantener la
+                                                autenticidad de las reseñas de la comunidad.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex flex-col sm:flex-row md:flex-col lg:flex-row items-stretch sm:items-center gap-space-xs shrink-0 w-full sm:w-auto"
+                                    >
+                                        <a
+                                            class="px-space-lg py-space-sm bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-xl shadow-sm transition-transform active:scale-95 flex items-center justify-center gap-space-xs text-center"
+                                            data-path="iniciar-sesion-registro"
+                                            href="/login"
+                                        >
+                                            <span class="material-symbols-outlined text-[18px]">login</span>
+                                            Iniciar Sesión
+                                        </a>
+                                        <a
+                                            class="px-space-md py-space-sm bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-xl border border-outline-variant/60 shadow-xs transition-colors flex items-center justify-center gap-space-xs text-center"
+                                            data-path="iniciar-sesion-registro"
+                                            href="/registro"
+                                        >
+                                            <span class="material-symbols-outlined text-secondary text-[18px]"
+                                                >person_add</span
+                                            >
+                                            Crear Cuenta Gamer
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Inline Rating & Feedback Form Box -->
+                            <div
+                                sec:authorize="isAuthenticated()"
+                                class="bg-surface-container-lowest border border-outline-variant/40 rounded-xl p-space-md mb-space-lg shadow-sm"
+                            >
+                                <form
+                                    th:action="@{/eventos/{id}/comentarios(id=${evento.id})}"
+                                    th:object="${comentarioDTO}"
+                                    method="post"
+                                >
+
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs mb-space-sm">
+                                        <div class="font-headline-sm text-[16px] text-on-surface font-semibold flex items-center gap-space-xs">
+                                            <span class="material-symbols-outlined text-primary text-[20px]">rate_review</span>
+                                            <span>Dejar mi Valoración</span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <span class="font-label-sm text-label-sm text-outline mr-1">Califica tu experiencia:</span>
+                                            <div class="rating">
+                                                <input type="radio" id="star5" th:field="*{valoracion}" value="5">
+                                                <label for="star5"><span class="material-symbols-outlined">star</span></label>
+
+                                                <input type="radio" id="star4" th:field="*{valoracion}" value="4">
+                                                <label for="star4"><span class="material-symbols-outlined">star</span></label>
+
+                                                <input type="radio" id="star3" th:field="*{valoracion}" value="3">
+                                                <label for="star3"><span class="material-symbols-outlined">star</span></label>
+
+                                                <input type="radio" id="star2" th:field="*{valoracion}" value="2">
+                                                <label for="star2"><span class="material-symbols-outlined">star</span></label>
+
+                                                <input type="radio" id="star1" th:field="*{valoracion}" value="1">
+                                                <label for="star1"><span class="material-symbols-outlined">star</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-xs">
+                                        <div class="w-full flex flex-col gap-space-xs">
+                                            <textarea
+                                                rows="3"
+                                                th:field="*{comentario}"
+                                                maxlength="1000"
+                                                class="w-full bg-surface-container-low border border-outline-variant/40 p-space-md rounded-xl text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none resize-none transition-all"
+                                                placeholder="Comparte tu opinión sobre la arena, los stands, arbitraje o conectividad..."
+                                            ></textarea>
+                                            <div class="flex items-center justify-between pt-1">
+                                                <span class="text-label-sm font-label-sm text-outline">Sé constructivo y respetuoso</span>
+                                                <button
+                                                    type="submit"
+                                                    class="px-space-lg py-space-sm bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-xl shadow-sm transition-transform active:scale-95 flex items-center justify-center gap-1 shrink-0"
+                                                >
+                                                    <span class="material-symbols-outlined text-[18px]">send</span
+                                                    >Publicar Reseña
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Reviews List -->
+                            <div class="space-y-space-md">
+                                <!-- Cuando no existen reseñas -->
+                                <div
+                                    th:if="${#lists.isEmpty(comentarios)}"
+                                    class="bg-surface-container-low border border-outline-variant/30 p-space-lg rounded-xl text-center"
+                                >
+                                    <span class="material-symbols-outlined text-outline text-[32px]">
+                                        rate_review
+                                    </span>
+
+                                    <p class="font-headline-sm text-on-surface font-semibold mt-2">
+                                        Todavía no hay reseñas
+                                    </p>
+
+                                    <p class="font-body-sm text-outline mt-1">
+                                        ¡Sé el primero en compartir tu experiencia en este evento!
+                                    </p>
+                                </div>
+
+                                <!-- Reseñas publicadas -->
+                                <div
+                                    th:if="${!#lists.isEmpty(comentarios)}"
+                                    class="flex flex-col gap-space-md"
+                                >
+                                    <div
+                                        th:each="comentario : ${comentarios}"
+                                        class="bg-surface-container-low border border-outline-variant/30 p-space-md sm:p-space-lg rounded-xl hover:bg-surface-container transition-colors"
+                                    >
+                                        <div
+                                            class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs mb-space-xs"
+                                        >
+                                            <div class="flex items-center gap-space-sm">
+
+                                                <!-- Inicial del nombre de usuario -->
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-primary/10 text-primary font-headline-sm flex items-center justify-center font-bold ring-1 ring-primary/30 shrink-0"
+                                                    th:text="${#strings.substring(comentario.usuario.usuario, 0, 1).toUpperCase()}"
+                                                >
+                                                    M
+                                                </div>
+
+                                                <div>
+                                                    <div class="flex items-center gap-space-xs flex-wrap">
+                                                        <span
+                                                            class="font-headline-sm text-[15px] text-on-surface font-semibold"
+                                                            th:text="${comentario.usuario.usuario}"
+                                                        >
+                                                            Mateo
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="flex items-center gap-space-xs mt-0.5">
+
+                                                        <!-- Estrellas -->
+                                                        <div class="flex items-center text-primary">
+                                                            <span
+                                                                th:each="i : ${#numbers.sequence(1, 5)}"
+                                                                class="material-symbols-outlined text-[16px]"
+                                                                th:classappend="${i <= comentario.valoracion} ? ' text-primary' : ' text-outline'"
+                                                            >star</span>
+                                                        </div>
+
+                                                        <!-- Fecha -->
+                                                        <span
+                                                            class="text-outline text-label-sm font-label-sm"
+                                                            th:text="${'• ' + #temporals.format(comentario.fecha, 'dd/MM/yyyy HH:mm')}"
+                                                        >
+                                                            • 19/11/2026
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Comentario -->
+                                        <p
+                                            class="font-body-md text-body-md text-on-surface-variant mt-1 leading-relaxed"
+                                            th:text="${comentario.comentario}"
+                                        >
+                                            Comentario del usuario.
+                                        </p>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </section>
+                    </div>
+                    <!-- Secondary 4-Column Sticky Action Sidebar -->
+                    <aside class="lg:col-span-4 sticky top-20 flex flex-col gap-space-md">
+                        <!-- Registration Card -->
+                        <div
+                            class="bg-surface-container-lowest rounded-2xl p-space-lg border border-outline-variant/40 shadow-xl relative overflow-hidden"
+                            id="entradas"
+                        >
+                            <div
+                                class="absolute -right-12 -top-12 w-32 h-32 rounded-full bg-primary/10 blur-2xl"
+                            ></div>
+                            <div class="flex items-center justify-between mb-space-sm">
+                                <span class="font-label-md text-label-md text-secondary uppercase tracking-wider"
+                                    >Entrada All-Access</span
+                                >
+                                <span
+                                    class="font-label-sm text-label-sm bg-emerald-100 text-tertiary-container px-space-xs py-0.5 rounded font-semibold"
+                                    >Fase 2 de Preventa</span
+                                >
+                            </div>
+                            <div class="flex items-baseline gap-space-xs mb-space-xs">
+                                <span 
+                                    th:if="${evento.precio == 0}"
+                                    class="font-headline-lg lg:font-display-hero-mobile text-headline-lg text-on-surface font-bold"
+                                >Gratis</span>
+                                <span 
+                                    th:unless="${evento.precio == 0}"
+                                    th:text="${'$' + #numbers.formatDecimal(evento.precio, 0, 'POINT', 0, 'COMMA')}"
+                                    class="font-headline-lg lg:font-display-hero-mobile text-headline-lg text-on-surface font-bold">
+                                </span>
+
+                            </div>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+                                Incluye acceso total a los 4 escenarios, zona free-play LAN, badge conmemorativo
+                                físico de coleccionista y sorteos oficiales.
+                            </p>
+                            <!-- Primary Actions -->
+                            <div class="space-y-space-sm">
+                                <button
+                                    class="w-full py-space-md bg-primary hover:bg-primary-container text-on-primary font-headline-sm text-headline-sm rounded-xl shadow-lg transition-transform hover:scale-[1.01] flex items-center justify-center gap-space-xs"
+                                >
+                                    <span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+                                    Reservar Mi Entrada Ahora
+                                </button>
+                            </div>
+                            <!-- Guaranteed Security & Community Perks -->
+                            <div
+                                class="mt-space-lg pt-space-md border-t border-outline-variant/30 space-y-space-xs text-on-surface-variant font-body-sm text-body-sm"
+                            >
+                                <div class="flex items-center gap-space-xs">
+                                    <span class="material-symbols-outlined text-emerald-600 text-[18px]"
+                                        >verified</span
+                                    >
+                                    <span>Entrada intransferible ligada a tu GamerID</span>
+                                </div>
+                                <div class="flex items-center gap-space-xs">
+                                    <span class="material-symbols-outlined text-emerald-600 text-[18px]"
+                                        >shield</span
+                                    >
+                                    <span>Reembolso 100% garantizado hasta 7 días antes</span>
+                                </div>
+                                <div class="flex items-center gap-space-xs">
+                                    <span class="material-symbols-outlined text-secondary text-[18px]"
+                                        >swap_horizontal_circle</span
+                                    >
+                                    <span>Acceso directo al canal de coordinación en Discord</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+</body>
+</html>

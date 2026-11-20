@@ -1,0 +1,11 @@
+.git
+.gitignore
+.idea
+.vscode
+node_modules
+target
+target
+.env
+.env.*
+!.env.example
+*.iml

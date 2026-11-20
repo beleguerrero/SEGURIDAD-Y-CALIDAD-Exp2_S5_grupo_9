@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{eventos_privados :: contenido})}">
+
+<body>
+
+    <main th:fragment="contenido" class="w-full pt-16 bg-surface min-h-[calc(100vh-16rem)]">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+
+                <div class="card shadow">
+                    <div class="card-body p-4 p-md-5 text-center">
+
+                        <!-- SECTION: EVENTOS PRIVADOS -->
+                        <section class="w-full max-w-[1440px] mx-auto px-margin py-space-xl" id="destacados">
+                            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+                                <div>
+                                    <div class="flex items-center gap-space-xs mb-space-xs">
+                                        <span class="material-symbols-outlined text-secondary">local_fire_department</span>
+                                        <span
+                                            class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold"
+                                            >Lo Más Esperado</span
+                                        >
+                                    </div>
+                                    <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">
+                                        Eventos Privados
+                                    </h2>
+                                </div>
+                            </div>
+                            <!-- Bento-Style Grid for Featured Events -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                                <!-- Event Card 1 (Major Focus) -->
+                                <article
+                                    th:each="evento : ${eventosPrivados}"
+                                    class="group relative rounded-xl bg-surface-container-lowest border border-outline-variant/50 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/40 flex flex-col"
+                                >
+                                    <div class="relative h-56 w-full overflow-hidden">
+                                        <div
+                                            class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                                            data-alt="Futuristic tactical first person shooter tournament visual, glowing purple smoke grenades, high-tech agent characters in high stakes shootout, dramatic cinematic lighting, cyan sparks."
+                                            style="
+                                                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBjuQQAhpudtGx21ASBTrEVMQxs_-zTYBF-pCJK2tCYkB1errjFoup782dX-coJF31bUSRqUXX1pI_-KdBtSQXBQmdxLe7WEqMgQCo5s0SqDZxdO_HdrGRVdvMVCmQGckS02NAxfy_34dBlcbA1EZf2KQyoFVGhYzQt1YRPWWBEOp9pFVt-qHvhX3jWPALHeWoMRvgZrIVWN4xKY1cG_RLa-pjkkkvTrQxXc6GRNg&quot;);
+                                            "
+                                        ></div>
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"
+                                        ></div>
+                                        <!-- Badges -->
+                                        <div
+                                            th:if="${evento.privado == 1}"
+                                            class="absolute top-space-md left-space-md flex flex-wrap gap-space-xs"
+                                        >
+                                            <span
+                                                class="px-space-sm py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shadow-md"
+                                            >
+                                                <span class="material-symbols-outlined text-[14px]">lock</span>
+                                                Privado
+                                            </span>
+                                        </div>
+                                        <div
+                                            class="absolute bottom-space-sm left-space-md right-space-md flex items-center justify-between"
+                                        >
+                                            <span
+                                                 th:text="${evento.juego.nombre}"
+                                                class="font-label-sm text-label-sm text-tertiary-fixed bg-inverse-surface/80 px-space-xs py-0.5 rounded backdrop-blur-md font-bold"
+                                            >
+                                                Juego
+                                            </span>
+                                            <span
+                                                class="font-headline-sm text-headline-sm text-white bg-inverse-surface/80 px-space-sm py-0.5 rounded backdrop-blur-md font-bold"
+                                            >
+                                                <span th:if="${evento.precio == 0}">Gratis</span>
+                                                <span th:unless="${evento.precio == 0}"
+                                                    th:text="${'$' + #numbers.formatDecimal(evento.precio, 0, 'POINT', 0, 'COMMA')}">
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+                                        <div>
+                                            <h3
+                                                class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors mb-space-xs"
+                                                th:text="${evento.nombre}"
+                                            >
+                                                Nombre del evento
+                                            </h3>
+                                            <p 
+                                                th:text="${evento.detalle}"
+                                                class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2"
+                                            >
+                                                Descripción del evento
+                                            </p>
+                                        </div>
+                                        <!-- Meta details row -->
+                                        <div
+                                            class="flex items-center justify-between text-on-surface-variant pt-space-sm bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/30"
+                                        >
+                                            <div class="flex items-center gap-space-xs">
+                                                <span class="material-symbols-outlined text-secondary text-[18px]"
+                                                    >calendar_month</span
+                                                >
+                                                
+                                                <span 
+                                                    th:text="${#temporals.format(evento.fechaEvento, 'dd/MM/yyyy HH:mm')}"
+                                                    class="font-label-md text-label-md"
+                                                >
+                                                    Fecha
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-space-xs">
+                                                <span class="material-symbols-outlined text-primary text-[18px]">
+                                                    location_on
+                                                </span>
+                                                <span 
+                                                    th:text="${evento.lugar}"
+                                                    class="font-label-md text-label-md font-semibold text-primary"
+                                                >
+                                                    Lugar
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <a
+                                            class="w-full py-space-sm rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md text-center hover:bg-primary hover:text-on-primary transition-all border border-outline-variant/40"
+                                            href="#"
+                                        >
+                                            Ver Detalles
+                                        </a>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+</body>
+</html>
